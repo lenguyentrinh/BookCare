@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 viewEngine(app);
 initWebRouters(app);
-// connectBD();
+connectBD();
 
 
 let port = process.env.PORT || 8069;
