@@ -5,8 +5,6 @@ import { json } from "body-parser";
 let getHomePage = async (req, res) => {
   try {
     let data = await db.User.findAll();
-    console.log("---------------------------");
-    console.log(data);
     return res.render("homepage.ejs", {
       data: JSON.stringify(data),
     });
@@ -53,6 +51,15 @@ let putCRUD = async (req, res) => {
     dataTable: allUsers,
   });
 };
+let deleteCRUD = async (req, res) => {
+  let userId = req.query.id;
+  if (userId) {
+    await CRUDService.deleteUserById(userId);
+    return res.send("Delete sucess");
+  } else {
+    return res.send("User not found!");
+  }
+};
 module.exports = {
   getHomePage: getHomePage,
   getCRUD: getCRUD,
@@ -60,4 +67,5 @@ module.exports = {
   displayGetCRUD: displayGetCRUD,
   getEditCRUD: getEditCRUD,
   putCRUD: putCRUD,
+  deleteCRUD: deleteCRUD,
 };
